@@ -9,6 +9,10 @@ Parameters:
       - t2.nano
       - t2.micro
     Description: Select EC2 instance type.
+  KeyPair:
+    # https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#aws-specific-parameter-types
+    Type: AWS::EC2::KeyPair::KeyName
+    Description: Select KeyPair Name.
 
 Resources:
   cfnVpc:
@@ -74,6 +78,7 @@ Resources:
           Value: "cfn-ec2-instance"
       SecurityGroupIds:
         - !Ref cfnSecurityGroup
+      KeyName: !Ref KeyPair
   cfnSecurityGroup:
     Type: "AWS::EC2::SecurityGroup"
     Properties:
